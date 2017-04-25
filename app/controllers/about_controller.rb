@@ -5,9 +5,9 @@ class AboutController < ApplicationController
   before_action :set_instance_presenter, only: [:show, :more]
 
   def show
-    if ENV["PASSPHARSE"]
+    if ENV["PASSPHRASE"]
       # if url has the correct secret passphrase set, show the registration form
-      if params[:secret] = ''
+      if params[:secret] = ENV["PASSPHRASE"]
         @show_registration = true
       else
         @show_registration = false
