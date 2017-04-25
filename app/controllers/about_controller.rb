@@ -4,7 +4,18 @@ class AboutController < ApplicationController
   before_action :set_body_classes
   before_action :set_instance_presenter, only: [:show, :more]
 
-  def show; end
+  def show
+    if ENV["PASSPHARSE"]
+      # if url has the correct secret passphrase set, show the registration form
+      if params[:secret] = ''
+        @show_registration = true
+      else
+        @show_registration = false
+      end
+    else
+      @show_registration = @instance_presenter.open_registrations
+    end
+  end
 
   def more; end
 
